@@ -8,29 +8,25 @@ import TeamMatchupBar from "./components/TeamMatchupBar";
 class App extends Component {
     state = {
         activeFixture: null,
-        homeTeam: null,
-        awayTeam: null,
         homeFormation: null,
         awayFormation: null,
-        homePlayers: [],
-        awayPlayers: [],
         activeTeam: 0,
-        homeJSONIndex: null,
-        awayJSONIndex: null,
-        activeForwardPlayers: [],
-        activeCenterPlayers: [],
-        activeBackPlayers: [],
-        activeGoalkeeper: [],
-        playerDetails: []
+        playerDetails: [],
+        teamColors: {
+            "Cardiff City": {
+                goalkeeper: "yellow",
+                player: "blue"
+            },
+            "Swansea City": {
+                goalkeeper: "green",
+                player: "white"
+            }
+        }
     };
 
     changeActiveTeam(teamIndex) {
         this.setState({
-            activeTeam: teamIndex,
-            activeForwardPlayers: [],
-            activeCenterPlayers: [],
-            activeBackPlayers: [],
-            activeGoalkeeper: []
+            activeTeam: teamIndex
         });
     }
 
@@ -61,25 +57,21 @@ class App extends Component {
                 }
             })
             .then(response => {
-                // console.log(response.data.teams[0].name);
                 this.setState({
                     activeFixture: response.data
                 });
                 response.data.teams.map(team => {
-                    // this.setState;
                     this.mapPlayers(team.players, response.data.teams.indexOf(team));
 
                     if (team.homeTeam === true) {
                         this.setState({
                             homeTeam: team.name,
-                            homeFormation: team.formation,
-                            homeJSONIndex: response.data.teams.indexOf(team)
+                            homeFormation: team.formation
                         });
                     } else {
                         this.setState({
                             awayTeam: team.name,
-                            awayFormation: team.formation,
-                            awayJSONIndex: response.data.teams.indexOf(team)
+                            awayFormation: team.formation
                         });
                     }
                     return 0;
@@ -87,46 +79,12 @@ class App extends Component {
             });
     }
 
-    // playerSort(pos) {
-    //     if (this.state.activeFixture) {
-    //         return this.state.activeFixture.teams[this.state.activeTeam].players.map(player => {
-    //             console.log(player)
-    // return player.position;
-    // this.state.playerDetails.map(element => {
-    // console.log(element);
-    // if (element.id === player.playerId) {
-    //     if (player.position === "FW") {
-    //         return element;
-    //         // return ({
-    //         //     id: element.id,
-    //         //     name: element.name,
-    //         //     position: player.position
-    //         // });
-    //     }
-    // } else if (pos === "middle" && player.position.split("")[1] === "M") {
-    //     // console.log(name);
-    // } else if (pos === "back" && player.position.split("")[1] === "B") {
-    //     // return { name };
-    // } else if (pos === "goal" && player.position === "GK") {
-    //     // return {};
-    // }
-    // }
-    //             });
-    //         });
-    //     }
-    // }
-
     render() {
         return (
             <div className="App col-8 mx-auto">
-                {/* {console.log(
-                    this.state.teamDetails
-                        ? this.state.teamDetails[this.state.activeTeam]
-                        : "Loading..."
-                )} */}
-
                 <div className="container border border-secondary">
                     <TeamMatchupBar
+                        information={this.state.activeFixture}
                         homeTeam={this.state.homeTeam}
                         awayTeam={this.state.awayTeam}
                         homeFormation={this.state.homeFormation}
@@ -146,17 +104,65 @@ class App extends Component {
                                 : null
                         }
                         playerDetails={this.state.playerDetails ? this.state.playerDetails : null}
+                        teamName={
+                            this.state.activeFixture
+                                ? this.state.activeFixture.teams[this.state.activeTeam].name
+                                : null
+                        }
+                        teamColors={this.state.teamColors}
                     />
                     {/* Center */}
-                    {/* <PlayerRow location={"center-row"} players={this.state.activeFixture.teams[this.state.activeTeam].players} /> */}
+                    <PlayerRow
+                        location={"center-row"}
+                        playerPositions={
+                            this.state.activeFixture
+                                ? this.state.activeFixture.teams[this.state.activeTeam].players
+                                : null
+                        }
+                        playerDetails={this.state.playerDetails ? this.state.playerDetails : null}
+                        teamName={
+                            this.state.activeFixture
+                                ? this.state.activeFixture.teams[this.state.activeTeam].name
+                                : null
+                        }
+                        teamColors={this.state.teamColors}
+                    />
                     {/* Back */}
-                    {/* <PlayerRow location={"back-row"} players={this.state.activeFixture.teams[this.state.activeTeam].players} /> */}
+                    <PlayerRow
+                        location={"back-row"}
+                        playerPositions={
+                            this.state.activeFixture
+                                ? this.state.activeFixture.teams[this.state.activeTeam].players
+                                : null
+                        }
+                        playerDetails={this.state.playerDetails ? this.state.playerDetails : null}
+                        teamName={
+                            this.state.activeFixture
+                                ? this.state.activeFixture.teams[this.state.activeTeam].name
+                                : null
+                        }
+                        teamColors={this.state.teamColors}
+                    />
                     {/* Keeper */}
-                    {/* <PlayerRow location={"goalkeeper-row"} players={this.state.activeFixture.teams[this.state.activeTeam].players} /> */}
+                    <PlayerRow
+                        location={"goalkeeper-row"}
+                        playerPositions={
+                            this.state.activeFixture
+                                ? this.state.activeFixture.teams[this.state.activeTeam].players
+                                : null
+                        }
+                        playerDetails={this.state.playerDetails ? this.state.playerDetails : null}
+                        teamName={
+                            this.state.activeFixture
+                                ? this.state.activeFixture.teams[this.state.activeTeam].name
+                                : null
+                        }
+                        teamColors={this.state.teamColors}
+                    />
                 </div>
-                <div className="container table-container">
+                {/* <div className="container table-container">
                     <h1>Table goes here</h1>
-                </div>
+                </div> */}
             </div>
         );
     }

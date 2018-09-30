@@ -22,7 +22,7 @@ const Player = ({ playername, shirtcolor, location }) => {
         }
     };
     return (
-        <div style={{background: "none"}} className="mx-0 justify-content-center">
+        <div style={{background: "none"}} className={`col-3 px-0 ${location}`}>
             <img src={shirt_color(shirtcolor)} alt="" className="player-shirt p-0 mx-auto" />
             <div className="player-name">
                 <span className="badge badge-pill badge-secondary">{playername}</span>

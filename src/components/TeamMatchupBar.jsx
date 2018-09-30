@@ -7,12 +7,26 @@ const TeamMatchupBar = ({
     homeFormation,
     awayFormation,
     activateHomeTeam,
-    activateAwayTeam
+    activateAwayTeam,
+    information
 }) => {
+    const showDate = () => {
+        if (information) {
+            let datetime = information.date;
+            let date = datetime.split("T")[0];
+            let time = datetime.split("T")[1];
+            let shortTime =
+                time.split(":")[0] +
+                ":" +
+                time.split(":")[1]
+            return <div>{date} <br /> {shortTime}</div>
+        }
+    };
     return (
         <div>
             <div className="row">
                 <div className="col">Home</div>
+                <div className="col">Location</div>
                 <div className="col">Away</div>
             </div>
             <div className="row">
@@ -26,6 +40,9 @@ const TeamMatchupBar = ({
                     </button>
                 </div>
                 <div className="col">
+                    <h2>{information ? information.location : "loading.."}</h2>
+                </div>
+                <div className="col">
                     <button
                         onClick={activateAwayTeam}
                         type="button"
@@ -37,6 +54,7 @@ const TeamMatchupBar = ({
             </div>
             <div className="row">
                 <div className="col">{homeFormation}</div>
+                <div className="col">{showDate()}</div>
                 <div className="col">{awayFormation}</div>
             </div>
         </div>
