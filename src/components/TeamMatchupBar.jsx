@@ -25,39 +25,41 @@ const TeamMatchupBar = ({
         }
     };
     return (
-        <div>
-            <div className="row">
-                <div className="col">Home</div>
-                <div className="col">Location</div>
-                <div className="col">Away</div>
+        <div className="row">
+            <div className="col-12 col-lg-4 px-0 order-2 order-lg-1">
+            <div>
+                    <strong>Home Team</strong>
+                </div>
+                <button
+                    onClick={activateHomeTeam}
+                    type="button"
+                    className="btn btn-outline-primary"
+                >
+                    <h2 className="my-0">{homeTeam}</h2>
+                </button>
+                <div>{homeFormation}</div>
             </div>
-            <div className="row">
-                <div className="col">
-                    <button
-                        onClick={activateHomeTeam}
-                        type="button"
-                        className="btn btn-outline-primary"
-                    >
-                        <h2 className="my-0">{homeTeam}</h2>
-                    </button>
+
+            <div className="col-12 col-lg-4 px-0 order-1 order-lg-2 ">
+                <div>
+                    <strong>Location</strong>
                 </div>
-                <div className="col">
-                    <h2>{information ? information.location : "loading.."}</h2>
-                </div>
-                <div className="col">
-                    <button
-                        onClick={activateAwayTeam}
-                        type="button"
-                        className="btn btn-outline-success"
-                    >
-                        <h2 className="my-0">{awayTeam}</h2>
-                    </button>
-                </div>
+                <h2>{information ? information.location : "loading.."}</h2>
+                <div>{showDate()}</div>
             </div>
-            <div className="row">
-                <div className="col">{homeFormation}</div>
-                <div className="col">{showDate()}</div>
-                <div className="col">{awayFormation}</div>
+
+            <div className="col-12 col-lg-4 px-0 order-3 order-lg-3">
+                <div>
+                    <strong>Away Team</strong>
+                </div>
+                <button
+                    onClick={activateAwayTeam}
+                    type="button"
+                    className="btn btn-outline-success"
+                >
+                    <h2 className="my-0">{awayTeam}</h2>
+                </button>
+                <div>{awayFormation}</div>
             </div>
         </div>
     );
