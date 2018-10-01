@@ -15,7 +15,7 @@ class PlayersRow extends Component {
         return playerDetails;
     };
 
-    Player = (pos, player, playerType = "player") => {
+    displayPlayer = (pos, player, playerType = "player") => {
         return (
             <PlayerInfo
                 playerDetails={this.findPlayerDetail(player.playerId)}
@@ -35,7 +35,7 @@ class PlayersRow extends Component {
             return this.props.playerPositions.map(player => {
                 // Finds forward players.
                 if (this.props.location === "front-row" && player.position === "FW") {
-                    return this.Player("", player);
+                    return this.displayPlayer("", player);
                 }
                 // Find center players.
                 else if (
@@ -43,11 +43,11 @@ class PlayersRow extends Component {
                     player.position.split("")[1] === "M"
                 ) {
                     if (player.position === "LM") {
-                        return this.Player("order-first", player);
+                        return this.displayPlayer("order-first", player);
                     } else if (player.position === "RM") {
-                        return this.Player("order-last", player);
+                        return this.displayPlayer("order-last", player);
                     } else {
-                        return this.Player("", player);
+                        return this.displayPlayer("", player);
                     }
                 }
                 // Find back players.
@@ -56,16 +56,16 @@ class PlayersRow extends Component {
                     player.position.split("")[1] === "B"
                 ) {
                     if (player.position === "LB") {
-                        return this.Player("order-first", player);
+                        return this.displayPlayer("order-first", player);
                     } else if (player.position === "RB") {
-                        return this.Player("order-last", player);
+                        return this.displayPlayer("order-last", player);
                     } else {
-                        return this.Player("", player);
+                        return this.displayPlayer("", player);
                     }
                 }
                 // Find goalkeeper player.
                 else if (this.props.location === "goalkeeper-row" && player.position === "GK") {
-                    return this.Player("", player, "goalkeeper");
+                    return this.displayPlayer("", player, "goalkeeper");
                 } else {
                     return null;
                 }
