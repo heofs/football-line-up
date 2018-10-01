@@ -61,16 +61,16 @@ class PlayerInfo extends Component {
                     >
                         <PopoverHeader>{this.props.playerDetails.name}</PopoverHeader>
                         <PopoverBody>
-                            <div className="div">
+                            <div>
                                 Games Played: {this.props.playerDetails.played}
                             </div>
-                            <div className="div">
+                            <div>
                                 Goals Scored: {this.props.playerDetails.goals}
                             </div>
-                            <div className="div">
+                            <div>
                                 Yellow Cards: {this.props.playerDetails.yellowCards}
                             </div>
-                            <div className="div">
+                            <div>
                                 Red Cards: {this.props.playerDetails.redCards}
                             </div>
                         </PopoverBody>
