@@ -10,24 +10,29 @@ const TeamMatchupBar = ({
     activateAwayTeam,
     information
 }) => {
-    // Format date correctly before displaying it.
+    // Format date and time correctly before displaying it.
     const showDate = () => {
         if (information) {
             let datetime = information.date;
-            let date = datetime.split("T")[0];
+            let date = datetime
+                .split("T")[0]
+                .split("-")
+                .reverse();
+            date = date[0] + "." + date[1] + "." + date[2];
             let time = datetime.split("T")[1];
-            let shortTime = time.split(":")[0] + ":" + time.split(":")[1];
+            time = time.split(":")[0] + ":" + time.split(":")[1];
             return (
                 <div>
-                    {date} <br /> {shortTime}
+                    Date: {date} <br /> Time: {time}
                 </div>
             );
         }
     };
     return (
-        <div className="row">
+        <div className="row pt-2">
+            {/* Home Team Info */}
             <div className="col-12 col-lg-4 px-0 order-2 order-lg-1">
-            <div>
+                <div>
                     <strong>Home Team</strong>
                 </div>
                 <button
@@ -37,9 +42,10 @@ const TeamMatchupBar = ({
                 >
                     <h2 className="my-0">{homeTeam}</h2>
                 </button>
+                <div>Formation</div>
                 <div>{homeFormation}</div>
             </div>
-
+            {/* Location Info */}
             <div className="col-12 col-lg-4 px-0 order-1 order-lg-2 ">
                 <div>
                     <strong>Location</strong>
@@ -47,7 +53,7 @@ const TeamMatchupBar = ({
                 <h2>{information ? information.location : "loading.."}</h2>
                 <div>{showDate()}</div>
             </div>
-
+            {/* Away Team Info */}
             <div className="col-12 col-lg-4 px-0 order-3 order-lg-3">
                 <div>
                     <strong>Away Team</strong>
@@ -59,6 +65,7 @@ const TeamMatchupBar = ({
                 >
                     <h2 className="my-0">{awayTeam}</h2>
                 </button>
+                <div>Formation</div>
                 <div>{awayFormation}</div>
             </div>
         </div>
