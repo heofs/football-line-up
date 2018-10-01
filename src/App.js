@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./styles/App.css";
 
 import PlayersRow from "./components/PlayersRow";
 import TeamMatchupBar from "./components/TeamMatchupBar";
@@ -104,6 +103,7 @@ class App extends Component {
     render() {
         return (
             <div className="App col-12 col-lg-8 mx-auto">
+            <h1>Interactive Match Fixture</h1>
                 <div className="container">
                     <TeamMatchupBar
                         information={this.state.activeFixture}
