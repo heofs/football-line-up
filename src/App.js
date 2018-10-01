@@ -103,8 +103,8 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App col-8 mx-auto">
-                <div className="container border border-secondary">
+            <div className="App col-12 col-lg-8 mx-auto">
+                <div className="container">
                     <TeamMatchupBar
                         information={this.state.activeFixture}
                         homeTeam={this.state.homeTeam}
