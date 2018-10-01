@@ -45,22 +45,26 @@ img.player-shirt {
 
 .front-row {
     position: relative;
-    top: 100px;
+    top: 120px;
 }
 .center-row {
     position: relative;
-    top: 235px;
+    top: 257px;
 }
 .back-row {
     position: relative;
-    top: 310px;
+    top: 340px;
 }
 .goalkeeper-row {
     position: relative;
-    top: 380px;
+    top: 445px;
 }
 
 .player-row {
     position: relative;
     width: 523.9px;
+}
+
+.player-col {
+    height: 48px;
 }
