@@ -1,39 +1,41 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Player from "./Player";
+import PlayerInfo from "./PlayerInfo";
 
 class PlayersRow extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-
-    findPlayerName = id => {
-        let playerName;
+    findPlayerDetail = id => {
+        let playerDetails;
         this.props.playerDetails.forEach(detail => {
             if (id === detail.id) {
-                playerName = detail.name;
+                playerDetails = detail;
+                // console.log(playerDetails)
             }
         });
-        return playerName;
+        return playerDetails;
+    };
+
+    Player = (pos, player, playerType = "player") => {
+        return (
+            <PlayerInfo
+                playerDetails={this.findPlayerDetail(player.playerId)}
+                shirtcolor={
+                    this.props.teamColors[this.props.teamName]
+                        ? this.props.teamColors[this.props.teamName][playerType]
+                        : "white"
+                }
+                location={pos}
+                key={player.playerId}
+            />
+        );
     };
 
     renderPlayers = () => {
         if (this.props.playerPositions && this.props.playerDetails) {
             return this.props.playerPositions.map(player => {
-                // Finds forward players
+                // Finds forward players.
                 if (this.props.location === "front-row" && player.position === "FW") {
-                    return (
-                        <Player
-                            playername={this.findPlayerName(player.playerId)}
-                            shirtcolor={
-                                this.props.teamColors[this.props.teamName]
-                                    ? this.props.teamColors[this.props.teamName].player
-                                    : "white"
-                            }
-                            key={player.playerId}
-                        />
-                    );
+                    return this.Player("", player);
                 }
                 // Find center players.
                 else if (
@@ -41,106 +43,29 @@ class PlayersRow extends Component {
                     player.position.split("")[1] === "M"
                 ) {
                     if (player.position === "LM") {
-                        return (
-                            <Player
-                                playername={this.findPlayerName(player.playerId)}
-                                shirtcolor={
-                                    this.props.teamColors[this.props.teamName]
-                                        ? this.props.teamColors[this.props.teamName].player
-                                        : "white"
-                                }
-                                key={player.playerId}
-                                location={"order-first"}
-                            />
-                        );
+                        return this.Player("order-first", player);
                     } else if (player.position === "RM") {
-                        return (
-                            <Player
-                                playername={this.findPlayerName(player.playerId)}
-                                shirtcolor={
-                                    this.props.teamColors[this.props.teamName]
-                                        ? this.props.teamColors[this.props.teamName].player
-                                        : "white"
-                                }
-                                key={player.playerId}
-                                location={"order-last"}
-                            />
-                        );
+                        return this.Player("order-last", player);
                     } else {
-                        return (
-                            <Player
-                                playername={this.findPlayerName(player.playerId)}
-                                shirtcolor={
-                                    this.props.teamColors[this.props.teamName]
-                                        ? this.props.teamColors[this.props.teamName].player
-                                        : "white"
-                                }
-                                key={player.playerId}
-                                location={""}
-                            />
-                        );
+                        return this.Player("", player);
                     }
                 }
-                // Find back players
+                // Find back players.
                 else if (
                     this.props.location === "back-row" &&
                     player.position.split("")[1] === "B"
                 ) {
                     if (player.position === "LB") {
-                        return (
-                            <Player
-                                playername={this.findPlayerName(player.playerId)}
-                                shirtcolor={
-                                    this.props.teamColors[this.props.teamName]
-                                        ? this.props.teamColors[this.props.teamName].player
-                                        : "white"
-                                }
-                                key={player.playerId}
-                                location={"order-first"}
-                            />
-                        );
+                        return this.Player("order-first", player);
                     } else if (player.position === "RB") {
-                        return (
-                            <Player
-                                playername={this.findPlayerName(player.playerId)}
-                                shirtcolor={
-                                    this.props.teamColors[this.props.teamName]
-                                        ? this.props.teamColors[this.props.teamName].player
-                                        : "white"
-                                }
-                                key={player.playerId}
-                                location={"order-last"}
-                            />
-                        );
+                        return this.Player("order-last", player);
                     } else {
-                        return (
-                            <Player
-                                playername={this.findPlayerName(player.playerId)}
-                                shirtcolor={
-                                    this.props.teamColors[this.props.teamName]
-                                        ? this.props.teamColors[this.props.teamName].player
-                                        : "white"
-                                }
-                                key={player.playerId}
-                                location={""}
-                            />
-                        );
+                        return this.Player("", player);
                     }
                 }
                 // Find goalkeeper player.
                 else if (this.props.location === "goalkeeper-row" && player.position === "GK") {
-                    return (
-                        <Player
-                            playername={this.findPlayerName(player.playerId)}
-                            shirtcolor={
-                                this.props.teamColors[this.props.teamName]
-                                    ? this.props.teamColors[this.props.teamName]["goalkeeper"]
-                                    : "white"
-                            }
-                            key={player.playerId}
-                            location={""}
-                        />
-                    );
+                    return this.Player("", player, "goalkeeper");
                 } else {
                     return null;
                 }
@@ -151,7 +76,7 @@ class PlayersRow extends Component {
     render() {
         return (
             <div className={`row player-row mx-0 justify-content-around ${this.props.location}`}>
-                {this.renderPlayers(this.props.teamName)}
+                {this.renderPlayers()}
             </div>
         );
     }
