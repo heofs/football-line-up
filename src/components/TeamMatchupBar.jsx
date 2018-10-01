@@ -10,16 +10,18 @@ const TeamMatchupBar = ({
     activateAwayTeam,
     information
 }) => {
+    // Format date correctly before displaying it.
     const showDate = () => {
         if (information) {
             let datetime = information.date;
             let date = datetime.split("T")[0];
             let time = datetime.split("T")[1];
-            let shortTime =
-                time.split(":")[0] +
-                ":" +
-                time.split(":")[1]
-            return <div>{date} <br /> {shortTime}</div>
+            let shortTime = time.split(":")[0] + ":" + time.split(":")[1];
+            return (
+                <div>
+                    {date} <br /> {shortTime}
+                </div>
+            );
         }
     };
     return (
@@ -62,6 +64,13 @@ const TeamMatchupBar = ({
 };
 
 TeamMatchupBar.propTypes = {
+    homeTeam: PropTypes.string,
+    awayTeam: PropTypes.string,
+    homeFormation: PropTypes.string,
+    awayFormation: PropTypes.string,
+    activateHomeTeam: PropTypes.func,
+    activateAwayTeam: PropTypes.func,
+    information: PropTypes.object,
     teams: PropTypes.object
 };
 
