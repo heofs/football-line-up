@@ -3,18 +3,20 @@ import PropTypes from "prop-types";
 
 import PlayerInfo from "./PlayerInfo";
 
+// Render the row for given player position.
 class PlayersRow extends Component {
+    // Find the matching player details for the given id.
     findPlayerDetail = id => {
         let playerDetails;
         this.props.playerDetails.forEach(detail => {
             if (id === detail.id) {
                 playerDetails = detail;
-                // console.log(playerDetails)
             }
         });
         return playerDetails;
     };
 
+    // Function for returning PlayerInfo with different parameters.
     displayPlayer = (pos, player, playerType = "player") => {
         return (
             <PlayerInfo
@@ -37,7 +39,7 @@ class PlayersRow extends Component {
                 if (this.props.location === "front-row" && player.position === "FW") {
                     return this.displayPlayer("", player);
                 }
-                // Find center players.
+                // Find center players and position to left or right depending on position.
                 else if (
                     this.props.location === "center-row" &&
                     player.position.split("")[1] === "M"
@@ -50,7 +52,7 @@ class PlayersRow extends Component {
                         return this.displayPlayer("", player);
                     }
                 }
-                // Find back players.
+                // Find back players and position to left or right depending on position.
                 else if (
                     this.props.location === "back-row" &&
                     player.position.split("")[1] === "B"
