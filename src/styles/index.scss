@@ -1,0 +1,85 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+} */
+
+$field-height: 665.6px;
+$field-width: 523.9px;
+
+html body {
+    background-color: rgb(247, 255, 246);
+}
+
+.App {
+    text-align: center;
+}
+
+.game-container {
+    background: url(../images/football_field.svg);
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+.game-container {
+    height: $field-height;
+    width: $field-width;
+    background-size: $field-width $field-height;
+}
+.player-row {
+    position: relative;
+    width: $field-width;
+}
+
+.player-col {
+    height: 3rem;
+}
+img.player-shirt {
+    height: 3rem;
+}
+.player-name {
+    font-size: 1rem;
+    position: relative;
+    top: -35px;
+}
+
+.front-row {
+    position: relative;
+    top: 120px;
+}
+.center-row {
+    position: relative;
+    top: 257px;
+}
+.back-row {
+    position: relative;
+    top: 340px;
+}
+.goalkeeper-row {
+    position: relative;
+    top: 445px;
+}
+
+@media (max-width: 599px) {
+    .game-container {
+        height: $field-height*0.8;
+        width: $field-width*0.8;
+        background-size: $field-width*0.8 $field-height*0.8;
+    }
+    .player-row {
+        width: $field-width*0.8;
+    }
+
+    .front-row {
+        top: 90px;
+    }
+    .center-row {
+        top: 190px;
+    }
+    .back-row {
+        top: 250px;
+    }
+    .goalkeeper-row {
+        top: 320px;
+    }
+}
