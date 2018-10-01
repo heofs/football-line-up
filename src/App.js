@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./styles/App.css";
 
-import PlayerRow from "./components/PlayerRow";
+import PlayersRow from "./components/PlayersRow";
 import TeamMatchupBar from "./components/TeamMatchupBar";
+// import PlayerInfoPopover from "./components/PlayerInfoPopover";
 
 class App extends Component {
     state = {
         activeFixture: null,
-        homeFormation: null,
-        awayFormation: null,
+        homeFormation: "loading...",
+        awayFormation: "loading...",
         activeTeam: 0,
         playerDetails: [],
         teamColors: {
@@ -93,10 +94,9 @@ class App extends Component {
                         activateAwayTeam={() => this.changeActiveTeam(1)}
                     />
                 </div>
-
                 <div className="container game-container p-0">
                     {/* Front */}
-                    <PlayerRow
+                    <PlayersRow
                         location={"front-row"}
                         playerPositions={
                             this.state.activeFixture
@@ -112,7 +112,7 @@ class App extends Component {
                         teamColors={this.state.teamColors}
                     />
                     {/* Center */}
-                    <PlayerRow
+                    <PlayersRow
                         location={"center-row"}
                         playerPositions={
                             this.state.activeFixture
@@ -128,7 +128,7 @@ class App extends Component {
                         teamColors={this.state.teamColors}
                     />
                     {/* Back */}
-                    <PlayerRow
+                    <PlayersRow
                         location={"back-row"}
                         playerPositions={
                             this.state.activeFixture
@@ -144,7 +144,7 @@ class App extends Component {
                         teamColors={this.state.teamColors}
                     />
                     {/* Keeper */}
-                    <PlayerRow
+                    <PlayersRow
                         location={"goalkeeper-row"}
                         playerPositions={
                             this.state.activeFixture
@@ -160,9 +160,6 @@ class App extends Component {
                         teamColors={this.state.teamColors}
                     />
                 </div>
-                {/* <div className="container table-container">
-                    <h1>Table goes here</h1>
-                </div> */}
             </div>
         );
     }
